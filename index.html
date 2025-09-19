@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Manual Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0KOVEMVIROPtOQ9IY5dRqyKNdekyebpa4pc6KPNHFuMlyQCANEVYw" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmNOIIbRi2" crossorigin="anonymous"></script>
+    <style>
+      :root {
+        --color-primary: #f97316; /* orange-500 */
+        --color-primary-dark: #ea580c; /* orange-600 */
+        --color-bg-canvas: #0f172a; /* slate-900 */
+        --color-bg-panel: #1e293b; /* slate-800 */
+        --color-bg-element: #334155; /* slate-700 */
+        --color-bg-hover: #475569; /* slate-600 */
+        --color-bg-contrast: #020617; /* slate-950 */
+        --color-text-base: #e2e8f0; /* slate-200 */
+        --color-text-light: #94a3b8; /* slate-400 */
+        --color-text-dark: #f8fafc; /* slate-50 */
+        --color-border: #475569; /* slate-600 */
+        --font-sans: 'Inter', sans-serif;
+      }
+      
+      html.light {
+        --color-primary: #f97316;
+        --color-primary-dark: #ea580c;
+        --color-bg-canvas: #f1f5f9; /* slate-100 */
+        --color-bg-panel: #ffffff; /* white */
+        --color-bg-element: #f1f5f9; /* slate-100 */
+        --color-bg-hover: #e2e8f0; /* slate-200 */
+        --color-bg-contrast: #f8fafc; /* slate-50 */
+        --color-text-base: #334155; /* slate-700 */
+        --color-text-light: #64748b; /* slate-500 */
+        --color-text-dark: #0f172a; /* slate-900 */
+        --color-border: #cbd5e1; /* slate-300 */
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background-color: var(--color-bg-canvas);
+        color: var(--color-text-base);
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: var(--color-bg-panel); }
+      ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--color-bg-hover); }
+
+      /* Themed UI Component Styles */
+      .bg-panel { background-color: var(--color-bg-panel); }
+      .bg-canvas { background-color: var(--color-bg-canvas); }
+      .bg-element { background-color: var(--color-bg-element); }
+      .bg-contrast { background-color: var(--color-bg-contrast); }
+      .text-base-color { color: var(--color-text-base); }
+      .text-light-color { color: var(--color-text-light); }
+      .text-dark-color { color: var(--color-text-dark); }
+      .text-primary-color { color: var(--color-primary); }
+      .border-color { border-color: var(--color-border); }
+      .border-primary-color { border-color: var(--color-primary); }
+      .divide-color > * + * { border-color: var(--color-border); }
+      
+      .hover-bg-element:hover { background-color: var(--color-bg-hover); }
+      .hover-border-color:hover { border-color: var(--color-text-light); }
+      .hover-border-primary:hover { border-color: var(--color-primary); }
+
+      .resizer { background-color: var(--color-border); }
+      .resizer:hover { background-color: var(--color-primary); }
+
+      /* Global Input Styles */
+      .input {
+        width: 100%; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 6px;
+        font-size: 14px; background-color: var(--color-bg-element); color: var(--color-text-base);
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      html.light .input { background-color: #fff; }
+      .input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.4); }
+      
+      /* Global Button Styles */
+      .btn { display: flex; align-items: center; justify-content: center; padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+      .btn-primary { background-color: var(--color-primary); color: white; border-color: var(--color-primary); }
+      .btn-primary:hover { background-color: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+      .btn-primary:disabled { background-color: var(--color-bg-hover); border-color: var(--color-bg-hover); color: var(--color-text-light); cursor: not-allowed; }
+      .btn-secondary { background-color: var(--color-bg-element); color: var(--color-text-base); border-color: var(--color-border); }
+      .btn-secondary:hover { background-color: var(--color-bg-hover); border-color: var(--color-text-light); }
+      
+      .icon-button { padding: 0.5rem; width: 2.5rem; border-width: 1px; border-radius: 0.25rem; transition: background-color 0.2s, border-color 0.2s, color 0.2s; border-color: var(--color-border); color: var(--color-text-light); }
+      .icon-button:hover { background-color: var(--color-bg-hover); }
+      .icon-button.active { background-color: var(--color-bg-element); border-color: var(--color-primary); color: var(--color-primary); }
+      
+      /* Toggle Switch */
+      .toggle-switch-bg { background-color: var(--color-bg-hover); }
+      .toggle-switch-dot { background-color: white; }
+      .toggle-switch-input:checked + .toggle-switch-bg { background-color: var(--color-primary-dark); }
+      .toggle-switch-input:checked + .toggle-switch-bg .toggle-switch-dot { transform: translateX(1.5rem); background-color: white; }
+      html.light .toggle-switch-dot { background-color: var(--color-text-light); }
+      html.light .toggle-switch-input:checked + .toggle-switch-bg .toggle-switch-dot { background-color: white; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react-dnd-html5-backend": "https://aistudiocdn.com/react-dnd-html5-backend@^16.0.1",
+    "react-dnd": "https://aistudiocdn.com/react-dnd@^16.0.1",
+    "immer": "https://aistudiocdn.com/immer@^10.1.3",
+    "dnd-core": "https://aistudiocdn.com/dnd-core@^16.0.1",
+    "react-markdown": "https://aistudiocdn.com/react-markdown@^10.1.0",
+    "remark-gfm": "https://aistudiocdn.com/remark-gfm@^4.0.1",
+    "react-syntax-highlighter": "https://aistudiocdn.com/react-syntax-highlighter@^15.6.6",
+    "react-syntax-highlighter/": "https://aistudiocdn.com/react-syntax-highlighter@^15.6.6/"
+  }
+}
+</script>
+</head>
+  <body class="">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

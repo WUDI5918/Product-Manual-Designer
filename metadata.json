@@ -1,0 +1,5 @@
+{
+  "name": "Product Manual Designer",
+  "description": "A powerful web application for designing product manuals using a three-panel interface. Features a drag-and-drop component library, a free-form editing canvas with page management, and a dynamic properties panel.",
+  "requestFramePermissions": []
+}
