@@ -135,13 +135,13 @@ const TemplateManagerScreen: React.FC<TemplateManagerScreenProps> = ({ templates
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-center space-x-2 transition-all duration-300 max-h-0 opacity-0 invisible group-hover:visible group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2">
-                                    <button onClick={() => onEdit(template.id)} className="btn btn-primary flex-1 text-xs px-2 py-2" title="Edit Content">
+                                    <button data-testid={`edit-template-${template.id}`} onClick={() => onEdit(template.id)} className="btn btn-primary flex-1 text-xs px-2 py-2" title="Edit Content">
                                         <i className="fas fa-pencil-alt mr-1"></i>Edit
                                     </button>
-                                    <button onClick={() => setPropertiesModalTemplate(template)} className="btn bg-white text-slate-800 hover:bg-slate-200 border-transparent flex-1 text-xs px-2 py-2" title="Properties">
+                                    <button data-testid={`props-template-${template.id}`} onClick={() => setPropertiesModalTemplate(template)} className="btn bg-white text-slate-800 hover:bg-slate-200 border-transparent flex-1 text-xs px-2 py-2" title="Properties">
                                         <i className="fas fa-cog mr-1"></i>Props
                                     </button>
-                                    <button onClick={() => onDelete(template.id)} className="btn bg-red-600 hover:bg-red-700 text-white border-transparent flex-1 text-xs px-2 py-2" title="Delete">
+                                    <button data-testid={`delete-template-${template.id}`} onClick={() => onDelete(template.id)} className="btn bg-red-600 hover:bg-red-700 text-white border-transparent flex-1 text-xs px-2 py-2" title="Delete">
                                         <i className="fas fa-trash mr-1"></i>Delete
                                     </button>
                                 </div>

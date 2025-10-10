@@ -206,18 +206,35 @@ const App: React.FC = () => {
       alert('Project Saved!');
     } else if (editingTarget.type === 'template') {
         const updatedTemplates = produce(templates, draft => {
-          const template = draft.find(t => t.id === editingTarget.id);
-          if (template) {
-            const currentPage = activeState.pages[activeState.currentPageIndex];
-            template.page = {
-              header: JSON.parse(JSON.stringify(currentPage.header)),
-              body: JSON.parse(JSON.stringify(currentPage.body)),
-              footer: JSON.parse(JSON.stringify(currentPage.footer)),
-            };
-          }
+            const template = draft.find(t => t.id === editingTarget.id);
+            if (template) {
+                const currentPage = activeState.pages[activeState.currentPageIndex];
+                template.page = {
+                    header: JSON.parse(JSON.stringify(currentPage.header)),
+                    body: JSON.parse(JSON.stringify(currentPage.body)),
+                    footer: JSON.parse(JSON.stringify(currentPage.footer)),
+                };
+            }
         });
+
+        const savedTemplate = updatedTemplates.find(t => t.id === editingTarget.id);
+
         setTemplates(updatedTemplates);
         saveCustomTemplatesToStorage(updatedTemplates);
+
+        if (savedTemplate) {
+            const updatedProjects = produce(projects, draft => {
+                draft.forEach(project => {
+                    const templateIndex = project.state.templates.findIndex(t => t.id === savedTemplate.id);
+                    if (templateIndex !== -1) {
+                        project.state.templates[templateIndex] = savedTemplate;
+                    }
+                });
+            });
+            setProjects(updatedProjects);
+            saveProjectsToStorage(updatedProjects);
+        }
+
         alert('Template Saved!');
     } else if (editingTarget.type === 'newTemplate') {
         setSaveTemplateModalOpen(true);
